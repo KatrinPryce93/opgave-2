@@ -11,7 +11,7 @@ img{
 }
 
 
-/* Standard indstillinger lavet til home-siden, men gælder globalt */
+/* Indstillinger lavet til home-side */
 
 :root{
  --grøn: #48734b;
@@ -131,6 +131,119 @@ body {
  background-color: var(--teal);
  color: var(--white);
  transform: translateY(-2px);
+}
+
+/* Flex box*/
+*{
+    box-sizing: border-box;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+img{
+    max-width: 100%; /*Sikre billedet responsivitet*/
+}
+
+/*Navigation*/
+
+header{
+    background-color: khaki;
+    padding: 1em;
+}
+
+nav ul {
+    list-style-type: none;/*Fjerner bulletpoints*/
+    padding: 0;
+}
+
+nav li{
+    padding: 0.8em;
+}
+
+nav li a{
+    color: #333;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+nav li a:hover{
+    text-decoration: underline;
+}
+
+/*Main*/
+main{
+    margin: 4em;
+}
+
+section{
+    margin-bottom: 3em;
+}
+ 
+/*Desktop*/
+
+@media screen and (min-width: 769px){
+    #bars{
+        display: none; /*Fjerner elementet visuelt*/
+    }
+
+    nav ul{
+        display: flex;
+        justify-content: center; /*Her kan man specificere hvor menuen skal være*/
+    }
+
+    section:nth-of-type(1){ /*nth-of-type finder elementet valgt i parantesen*/
+        display: flex;
+        gap: 2em;
+    }
+
+    section:nth-of-type(1) div{
+        width: 50%;
+    }
+
+     section:nth-of-type(1) img{
+        width: 50%;
+    }
+    section:nth-of-type(2){
+        display: flex;
+        justify-content: space-around;
+        gap: 1em;
+    }
+
+    .cta-1, .cta-2, .cta-3{
+        width: 30%;
+    }
+}
+
+/* Mobil og Tablet */
+
+@media screen and (max-width: 768px){
+    header nav{
+        display: none; /*Skjuler nav-elementet i mobil-versionen*/
+    }
+
+    header{
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .show{
+        display: block;
+        position: absolute;
+        top: 49px;
+        left: 0;
+        background-color: rgb(254, 237, 234);
+        width: 100%;
+    }
+
+    button#bars{
+        background-color: transparent;
+        border: none;
+    }
+
+     section:nth-of-type(1) div{
+        padding-bottom: 2em;
+    }
+
 }
 
 
