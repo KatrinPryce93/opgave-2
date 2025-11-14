@@ -1,0 +1,226 @@
+/*Generel styling af af siden */
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+}
+
+
+img{
+    width: 100%;
+}
+
+
+/* Standard indstillinger lavet til home-siden, men gælder globalt */
+
+:root{
+ --grøn: #48734b;
+ --lightbrown: #704545;
+ --mørkebrun: #594646;
+ --card: #E3EBF2;
+ --white: #ffffff;
+ --shadow: 0 6px 12px rgba(0,0,0,.12);
+}
+
+/* General baggrundsfarve */
+html {
+ background-color: var(--card);
+}
+
+/* General styling af tekst */
+body {
+ margin: 0;
+ background-color: var(--lightbrown);
+ color: var(--ink);
+ font-family: 'EB Garamond', serif;
+ line-height: 1.5;
+ -webkit-font-smoothing: antialiased;
+ -moz-osx-font-smoothing: grayscale;
+}
+
+.page {
+ width: 100%;
+ max-width: 430px;
+ margin: 0 auto;
+ overflow-x: hidden;
+ background-color: var(--card);
+}
+
+
+
+/*Styling af header*/
+    
+  .site-header {
+  background: #F3EDE0; /*Baggrundsfarve*/
+  padding: 0.5rem;
+  color: #7d5151; /*Tekstfarve*/
+  position: relative;
+  z-index: 2000;
+  }
+
+    /* Flex-container til at placere elementerne side om side */
+        .header-container {
+          display: flex;                  /* aktiverer flexbox */
+          align-items: center;            /* centrerer elementer lodret */
+          justify-content: space-between; /* fordeler plads mellem elementerne */
+          gap: 20px;                      /* lidt luft imellem */
+          }
+
+   /* Logo */
+        .site-logo {
+          height: 50px;     
+          width: auto;      
+          }
+
+   /* Navigation */
+        .navbar a {
+          margin-left: 15px;
+          text-decoration: none;
+          color: #6aad75;
+          font-weight: bold;
+        }
+
+        .site-name a {
+  color: inherit;        /* arver farven fra .site-name */
+  text-decoration: none; /* fjerner understregning */
+}
+
+
+
+/
+
+/*Styling af footer*/
+.site-footer {
+  background: #628974; /*Baggrundsfarve*/
+  color: #623d33; /*Tekstfarve*/
+  text-align: left;
+  padding-left: 2rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-right: 1rem;
+}
+
+
+
+
+/* ====== Tiles (store knapper) ====== */
+.tiles {
+ display: flex;
+ flex-direction: column;
+ gap: 15px;
+ padding: 20px;
+ margin: 0 auto;
+}
+.tile {
+ background: var(--white);
+ border-radius: 8px;
+ text-align: center;
+ padding: 15px;
+ font-size: 18px;
+ font-weight: 500;
+ color: var(--teal);
+ transition: all 0.3s ease;
+ cursor: pointer;
+ text-transform: uppercase;
+ letter-spacing: 1px;
+ box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+ color: inherit;              /* behold oprindelig tekstfarven */
+  text-decoration: none;  
+}
+.tile:hover {
+ background-color: var(--teal);
+ color: var(--white);
+ transform: translateY(-2px);
+}
+
+
+/*  OM OS  OM OS  OM OS    OM OS  OM OS  OM OS   OM OS  OM OS  OM OS    OM OS  OM OS  OM OS */
+
+/* Hero sektion */
+.om-os-hero {
+ position: relative;
+}
+
+
+.om-os-hero img {
+ width: 100%;
+ height: 300px;
+ object-fit: cover;
+}
+
+
+.om-os-hero h1 {
+ background-color: #f3ede0;
+ padding: 0.5rem 1rem;
+ border-radius: 6px;
+ position: absolute;
+ top: 50%;
+ left: 50%;
+ transform: translate(-50%, -50%);
+ color: #5d854f;
+ font-size: 2.5rem;
+}
+
+
+/* Tekst */
+.om-tekst {
+ color: #67a974;
+ text-align: center;
+ margin: 20px;
+ line-height: 1.5;
+}
+
+
+
+/* Kontaktformular */
+.contact {
+ background-color: #8ec796;
+ color: #f3ede0;
+ padding: 20px;
+ border-radius: 12px;
+ max-width: 450px;
+ margin: 0 auto 40px auto;
+}
+
+
+.contact h2 {
+ text-align: center;
+ margin-bottom: 15px;
+}
+
+.h2-kontakt {
+  color: #F3EDE0;
+}
+
+
+form {
+ display: flex;
+ flex-direction: column;
+ gap: 12px;
+}
+
+
+form input,
+form textarea {
+ padding: 10px;
+ border: none;
+ border-radius: 6px;
+ font-size: 14px;
+ width: 100%;
+}
+
+
+form button {
+ background-color: #f3ede0;
+ color: #854747;
+ padding: 10px;
+ border: none;
+ border-radius: 6px;
+ cursor: pointer;
+ font-weight: bold;
+}
+
+
+form button:hover {
+ background-color: #e2dac6;
+}
