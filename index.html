@@ -14,15 +14,17 @@
  <!--Header med logo og menu -->
     <header class="site-header">
       <div class="header-container">
-        <nav class="navbar">
-          <a href="index.html">Forside</a>
-          <a href="sæsonkalenderogopskrifter.html">Sæsonkalender og opskrifter</a>
-          <a href="kontakt.html">Kontakt</a>
-        </nav>
-        <!-- Vi indsætter logo-billedet i header i stedet for tekst -->
-        <a href="index.html" class="site-logo-link">
+        <!-- Simpelt logo-billede øverst i venstre hjørne (kun billedet) -->
+        <a href="index.html" class="site-logo-only">
           <img src="img/logo.png" alt="Virksomhedslogo" class="site-logo">
         </a>
+        <div class="header-stack">
+          <nav class="navbar">
+            <a href="index.html">Forside</a>
+            <a href="sæsonkalenderogopskrifter.html">Sæsonkalender og opskrifter</a>
+            <a href="kontakt.html">Kontakt</a>
+          </nav>
+        </div>
       </div>
     </header>
 <!--Herunder og ned til kommentaren med footer indsættes specifikt indhold på jeres side-->
@@ -32,18 +34,30 @@
    <main>
      <!-- Body: 3 store billeder som fungerer som knapper (mobile-first) -->
      <section class="hero-buttons">
-       <!-- Knap 1 -->
-       <a class="hero-btn" href="sæsonkalenderogopskrifter.html">
-         <img src="img/knap.1.jpg" alt="Sæsonkalender og opskrifter - knap 1">
+       <!-- Knap 1 - Sæsonkalender -->
+       <a class="hero-btn" href="sæsonkalenderogopskrifter.html" aria-label="Gå til sæsonkalender">
+         <div class="hero-media">
+           <img src="img/knap.1.jpg" alt="Sæsonkalender">
+           <div class="hero-overlay"><span>Sæson<br>Kalender</span></div>
+         </div>
        </a>
-       <!-- Knap 2 -->
-       <a class="hero-btn" href="sæsonkalenderogopskrifter.html">
-         <img src="img/knap.2.png" alt="Ugens opskrifter - knap 2">
+
+       <!-- Knap 2 - Ugens opskrifter -->
+       <a class="hero-btn" href="sæsonkalenderogopskrifter.html" aria-label="Gå til ugens opskrifter">
+         <div class="hero-media">
+           <img src="img/knap.2.png" alt="Ugens opskrifter">
+           <div class="hero-overlay"><span>Ugens<br>Opskrifter</span></div>
+         </div>
        </a>
-       <!-- Knap 3 -->
-       <a class="hero-btn" href="kontakt.html">
-         <img src="img/farmers.photo.png" alt="Om os og kontakt - knap 3">
+
+       <!-- Knap 3 - Om os -->
+       <a class="hero-btn" href="kontakt.html" aria-label="Gå til om os og kontakt">
+         <div class="hero-media">
+           <img src="img/farmers.photo.png" alt="Om os og kontakt">
+           <div class="hero-overlay"><span>Om os<br>og kontakt</span></div>
+         </div>
        </a>
+
      </section>
    </main>
 
@@ -53,16 +67,21 @@
  <!--footer = ens på alle sider -->  
 
    <footer class="site-footer">
-  <h3>Kontakt</h3>
-  <div class="some-links">
-    <img src="#" alt="Facebook logo">
-    <img src="#" alt="Instagram logo">
-    <img src="#" alt="Tlf logo">
+  <div class="footer-contact">
+    <div class="footer-icons">
+      <!-- Ikoner til venstre -->
+      <img src="img/ChatGPT Image Oct 30, 2025, 11_26_53 PM.png" alt="Facebook logo">
+      <img src="img/instagram.png" alt="Instagram logo">
+      <img src="img/tlf.png" alt="Telefon ikon">
+    </div>
+    <div class="footer-text">
+      <h3>Kontakt</h3>
+      <p>
+        Tlf: +45 12 34 56 78 <br>
+        E-mail: info@livsnyderne.dk
+      </p>
+    </div>
   </div>
-    <p>
-    Tlf: +45 12 34 56 78 <br>
-    E-mail: info@livsnyderne.dk
-  </p>
 </footer>
 
 </body>

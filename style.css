@@ -5,6 +5,86 @@
     margin: 0;
 }
 
+/* ---------- Forced overrides (end of file) ---------- */
+/* Ensure header background, logo position, centered menu, and no gaps between hero images */
+:root { --header-height: 84px; }
+.site-header{
+    background: #FDF9F0 !important;
+    box-shadow: none;
+}
+.header-container{ display:flex; align-items:center; justify-content:center; position:relative; }
+.site-logo-link{ position:relative; left:0; top:0; z-index:60; }
+.site-logo{ height:46px; display:block; }
+.site-header .navbar{
+    display:flex !important;
+    width:100%;
+    gap:28px;
+    justify-content:center;
+    align-items:center;
+    white-space:nowrap; /* keep menu on single line */
+    margin-top:18px; /* ensure it's not pushed down too far */
+}
+.site-header .navbar a{
+    display:inline-block;
+    font-family:'Noto Serif', serif !important;
+    color:#573120 !important;
+    font-weight:700 !important;
+    padding:6px 12px !important;
+}
+
+/* === Strong override: restore original centered menu with small left logo ===
+   This block forces the exact layout from your first screenshot: small logo
+   image in the top-left corner and a compact, centered single-row menu. */
+.site-header{ position:relative !important; }
+.site-logo-only{ position:absolute !important; left:18px !important; top:14px !important; z-index:2200 !important; }
+.site-logo-only img{ height:48px !important; width:auto !important; }
+
+/* Keep nav compact and centered in a max-width container */
+.site-header .navbar{ display:flex !important; justify-content:center !important; align-items:center !important; width:auto !important; max-width:760px !important; margin:0 auto !important; gap:26px !important; }
+.site-header .navbar a{ display:inline-block !important; margin:0 6px !important; padding:6px 8px !important; text-decoration:none !important; }
+
+/* Remove any extra left padding that pushes nav apart */
+.header-container{ padding-left:0 !important; }
+
+/* On very small screens, reduce spacing so menu stays on one line */
+@media (max-width:420px){
+    .site-header .navbar{ gap:12px !important; }
+    .site-logo-only{ left:12px !important; top:10px !important; }
+    .site-logo-only img{ height:40px !important; }
+}
+
+/* High-specificity enforced styles so header matches the desired layout exactly */
+.site-header .logo-box{ position: absolute; left: 18px; top: 14px; }
+.site-header { min-height: 110px; }
+.site-header .navbar{ gap:40px !important; }
+.site-header .navbar a{ text-decoration: none !important; border-radius: 0 !important; }
+.site-header .navbar a:hover, .site-header .navbar a:focus{ text-decoration: underline !important; text-underline-offset: 4px; }
+
+/* Force centered, single-row nav with moderate spacing (restore original look) */
+.header-container, .site-header { display:flex; align-items:center; justify-content:center; }
+.header-stack{ display:block; }
+.site-header .navbar{ width:auto !important; gap:28px !important; display:flex !important; justify-content:center !important; }
+.site-header .navbar a{ display:inline-block !important; margin:0 !important; padding:6px 10px !important; }
+.site-header .navbar a:first-child{ margin-left: 0 !important; }
+
+.site-header{ padding:0 12px; }
+/* Hero images: remove any whitespace and ensure stacked full-bleed */
+.hero-buttons{ display:block !important; line-height:0 !important; font-size:0 !important; margin:0; padding:0; }
+.hero-btn{ display:block !important; margin:0; padding:0; width:100vw; margin-left:calc(50% - 50vw); }
+.hero-media{ width:100vw !important; height:calc((100vh - var(--header-height))/3) !important; margin:0; padding:0; overflow:hidden; }
+.hero-media img{ display:block !important; width:100% !important; height:100% !important; object-fit:cover !important; opacity:0.8 !important; margin:0 !important; padding:0 !important; }
+.hero-overlay{ z-index:70 !important; }
+
+@media (max-width:420px){
+    :root{ --header-height:110px; }
+    .site-header{ padding:0 10px; }
+    .site-header .navbar{ gap:8px; }
+    .site-header .navbar a{ font-size:13px; padding:6px 6px !important; }
+    .hero-media{ height:calc((100vh - var(--header-height))/3) !important; }
+}
+
+/* End forced overrides */
+
 
 img{
     width: 100%;
@@ -14,24 +94,27 @@ img{
 /* Indstillinger lavet til home-side */
 
 :root{
- --grøn: #48734b;
- --lightbrown: #704545;
- --mørkebrun: #594646;
- --card: #E3EBF2;
+ --brand: #2d6a4f;       /* primær grøn fra mockup */
+ --accent: #f4a261;      /* varm accent (orange/beige) */
+ --muted: #F3EDE0;       /* lys beige baggrundselement */
+ --background-card: #E3EBF2; /* lyse kort baggrunde */
  --white: #ffffff;
  --shadow: 0 6px 12px rgba(0,0,0,.12);
+ --header-height: 84px; /* default header height, bruges i beregninger */
 }
 
 /* General baggrundsfarve */
 html {
- background-color: var(--card);
+ background-color: #FDF9F0; /* brug samme varme baggrund som logo */
 }
 
 /* General styling af tekst */
 body {
  margin: 0;
- background-color: var(--lightbrown);
- color: var(--ink);
+ background-color: #fdf9f0;
+ /* tekstfarve: varm brun/lav kontrast der matcher mockup */
+ color: #6b3d32;
+ overflow-x: hidden; /* undgå horisontal scroll når vi bruger 100vw */
  /* Global font: brug Noto Serif som i designet */
  font-family: 'Noto Serif', serif;
  line-height: 1.5;
@@ -39,47 +122,133 @@ body {
  -moz-osx-font-smoothing: grayscale;
 }
 
+/* Forside: hero billeder som fylder hele viewport-bredden (full-bleed) */
+.hero-buttons{ display:flex; flex-direction:column; gap:0; }
+.hero-btn{ display:block; width:100vw; margin-left:calc(50% - 50vw); }
+.hero-media{ position:relative; width:100vw; height:calc((100vh - var(--header-height)) / 3); /* 3 images fill viewport minus header */ overflow:hidden; }
+.hero-media img{ width:100%; height:100%; object-fit:cover; display:block; opacity:0.8; }
+
+/* Hvis vi dæmper billedet med opacity men ønsker overlay fuldt hvid, brug pseudo-element på .hero-media */
+.hero-media::after{
+    content: '';
+    position: absolute; inset:0; pointer-events:none; /* intet klik */
+}
+
+/* Overlay-boks ovenpå billedet - semi-transparent, centreret */
+.hero-overlay{
+    position:absolute; left:50%; top:53%; transform:translate(-50%,-50%);
+    background: rgba(255,255,255,0.92);
+    padding: 14px 20px; border-radius:8px; box-shadow:0 12px 30px rgba(0,0,0,0.14);
+    display:flex; align-items:center; justify-content:center;
+    text-align:center; color:#573120; font-weight:800; font-size:20px;
+    max-width:72%; line-height:1.02; letter-spacing:0.6px;
+}
+.hero-overlay span{ line-height:1.01; font-family:'Noto Serif', serif; display:inline-block; text-shadow: 0 1px 0 rgba(255,255,255,0.6); }
+
+/* På større skærme: højere billeder og grid-justering */
+@media(min-width:720px){
+        .hero-media{ height:calc((100vh - var(--header-height)) / 3); }
+    .hero-overlay{ padding:26px 34px; font-size:34px; max-width:48%; }
+}
+
+/* Logo venstre hjørne og navbar centreret på linje som i mockup */
+.header-container{ display:flex; align-items:center; justify-content:center; position:relative; }
+.site-logo-link{ position:relative; left:0; top:0; }
+.site-logo{ height:46px; display:block; margin:0 auto; }
+
+/* Minimal logo: kun billedet placeret i øverste venstre hjørne indenfor header */
+.site-logo-only{ position: absolute; left: 12px; top: 12px; z-index: 2100; }
+.site-logo-only .site-logo, .site-logo-only img{ height:56px; display:block; }
+
+/* skjul eventuelle gamle wrappers hvis de findes */
+.logo-box, .site-logo-left{ display:none !important; }
+.navbar{ margin:0 auto; }
+
+/* Ny struktur: header-stack gør logo over nav i kolonne (mobil-først) */
+.header-stack{ display:flex; flex-direction:column; align-items:center; gap:8px; }
+
+/* Placer menu tydeligt under logo på mobil: større top margin og centreret blok */
+.site-header .navbar{ display:flex; flex-wrap:nowrap; justify-content:center; gap:16px; margin-top:8px; }
+.site-header .navbar a{ font-family:'Noto Serif', serif; color:#573120; font-weight:700; text-decoration:none; padding:6px 8px; border-radius:0; }
+
+/* Undgå box-hover: kun en streg under teksten skal vises ved hover/focus */
+.site-header .navbar a:hover,
+.site-header .navbar a:focus{
+    text-decoration: underline; /* viser streg */
+    background: transparent; /* fjern boks */
+}
+
+@media(max-width:480px){
+    .navbar a{ font-size:13px; padding:6px 6px; }
+    .site-logo{ height:40px; }
+    .site-header .navbar{ white-space: nowrap; }
+}
+
+/* Mobile fix: place logo in normal flow on small screens so it doesn't overlap menu
+   and ensure the menu is centered and fits on one line. */
+@media(max-width:420px){
+    /* For mobile: logo skal ligge ovenpå menuen i hjørnet, men menuen skal rykkes ned så den ikke bliver gemt */
+    .site-logo-only{ position: absolute !important; left: 12px; top: 8px; z-index:2200; }
+    .site-header { padding-top: 8px; min-height: 84px; }
+    .site-header .navbar{ gap:12px !important; justify-content:center; margin-top:56px !important; }
+    .header-container{ padding-left: 12px; }
+}
+
+/* Menu styling: Noto Serif og ønsket farve */
+.navbar a{ font-family: 'Noto Serif', serif; color:#573120; }
+
+/* Sørg for menuen har luft nedenunder så den ikke overlapper logo */
+.site-header .navbar{ margin-top: 8px; }
+
+/* Fjern standard page-bagkant så billeder går helt til kanten af vinduet */
+.page, main, .hero-buttons{ max-width:100%; margin:0; padding:0; }
+
 .page {
- width: 100%;
- max-width: 430px;
- margin: 0 auto;
- overflow-x: hidden;
- background-color: var(--card);
+    width: 100%;
+    max-width: 100%; /* tillad fuld bredde for hero full-bleed */
+    margin: 0 auto;
+    overflow-x: hidden;
+    background-color: var(--background-card);
 }
 
 
 
 /*Styling af header*/
     
-  .site-header {
-  background: #F3EDE0; /*Baggrundsfarve*/
-  padding: 0.5rem;
-  color: #7d5151; /*Tekstfarve*/
-  position: relative;
-  z-index: 2000;
-  }
+    .site-header {
+    background: #FDF9F0 !important; /* Baggrundsfarve som logo */
+    padding: 0.6rem 0.9rem;
+    color: #573120;
+    min-height: var(--header-height);
+    position: relative;
+    z-index: 2000;
+    }
 
     /* Flex-container til at placere elementerne side om side */
-        .header-container {
-          display: flex;                  /* aktiverer flexbox */
-          align-items: center;            /* centrerer elementer lodret */
-          justify-content: space-between; /* fordeler plads mellem elementerne */
-          gap: 20px;                      /* lidt luft imellem */
-          }
+                .header-container {
+                    display: flex;                  /* aktiverer flexbox */
+                    align-items: center;            /* centrerer elementer lodret */
+                    justify-content: center; /* center menu og logo (logo er absolute) */
+                    gap: 12px;                      /* lidt luft imellem */
+                    max-width:1100px; margin:0 auto;
+                    }
 
    /* Logo */
-        .site-logo {
-          height: 50px;     
-          width: auto;      
-          }
+                .site-logo {
+                    height: 52px;     
+                    width: auto;      
+                    }
 
    /* Navigation */
-        .navbar a {
-          margin-left: 15px;
-          text-decoration: none;
-          color: #6aad75;
-          font-weight: bold;
-        }
+                .navbar a {
+                    margin-left: 12px;
+                    text-decoration: none;
+                    color: #573120;
+                    font-family: 'Noto Serif', serif;
+                    font-weight: 700;
+                    padding:6px 8px; border-radius:6px;
+                }
+                .navbar a:hover{ background: rgba(45,106,79,0.06); }
 
         .site-name a {
   color: inherit;        /* arver farven fra .site-name */
@@ -90,10 +259,24 @@ body {
     background: #628974; /*Baggrundsfarve*/
     color: #623d33; /*Tekstfarve*/
     text-align: left;
-    padding: 1.25rem; /* kortet padding på mobil først */
+    padding: 8px 12px; /* kortet padding på mobil først - reduceret */
     display: flex;
     flex-direction: column;
     gap: 10px;
+}
+
+.site-footer .some-links img{ height:34px; margin-right:12px; }
+
+/* Footer: icons to the left, text to the right on mobile and desktop */
+.footer-contact{ display:flex; align-items:flex-start; gap:16px; }
+.footer-contact .footer-icons{ display:flex; flex-direction:column; gap:8px; align-items:flex-start; }
+.footer-contact .footer-icons img{ height:28px; width:auto; display:block; }
+.footer-contact .footer-text{ display:block; margin-left: auto; }
+
+@media(min-width:769px){
+    .footer-contact{ justify-content: space-between; width:100%; align-items:center; }
+    .footer-contact .footer-icons{ flex-direction:column; }
+    .footer-contact .footer-text{ text-align:right; margin-left:0; }
 }
 
 /* Footer: desktop layout (række) */
@@ -146,7 +329,6 @@ body {
 *{
     box-sizing: border-box;
     margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 img{
@@ -155,10 +337,12 @@ img{
 
 /*Navigation*/
 
-header{
-    background-color: khaki;
-    padding: 1em;
-}
+/* fjernet midlertidig khaki header-rule */
+
+/* Sørg for at hero-knapper er blokke uden margin så billeder rører hinanden */
+.hero-buttons{ display:block; }
+.hero-buttons .hero-btn{ display:block; margin:0; padding:0; }
+.hero-buttons .hero-media{ margin:0; }
 
 nav ul {
     list-style-type: none;/*Fjerner bulletpoints*/
@@ -181,7 +365,7 @@ nav li a:hover{
 
 /*Main*/
 main{
-    margin: 4em;
+    margin: 0;
 }
 
 section{
@@ -226,8 +410,12 @@ section{
 /* Mobil og Tablet */
 
 @media screen and (max-width: 768px){
+    /* Vis navigation på mobil (brugt i mockup) */
     header nav{
-        display: none; /*Skjuler nav-elementet i mobil-versionen*/
+        display: flex; /* vis menuen på mobil */
+        gap:12px;
+        justify-content:center;
+        align-items:center;
     }
 
     header{
@@ -272,15 +460,15 @@ section{
 
 
 .om-os-hero h1 {
- background-color: #f3ede0;
- padding: 0.5rem 1rem;
- border-radius: 6px;
+ background-color: var(--muted);
+ padding: 0.6rem 1.2rem;
+ border-radius: 8px;
  position: absolute;
  top: 50%;
  left: 50%;
  transform: translate(-50%, -50%);
- color: #5d854f;
- font-size: 2.5rem;
+ color: var(--brand);
+ font-size: 2.1rem;
 }
 
 
@@ -554,9 +742,9 @@ form button:hover {
     left: 50%;
     transform: translateX(-50%);
     bottom: 12px;
-    width: 72%;
-    max-width: 240px;
-    height: 42px;
+    width: 68%;
+    max-width: 220px;
+    height: 44px;
     background: rgba(243,237,224,0.98); /* næsten hvid-beige */
     border-radius: 10px;
     box-shadow: 0 8px 18px rgba(0,0,0,0.12);
@@ -581,9 +769,9 @@ form button:hover {
 @media (min-width: 769px) {
     .day-list {
         display: grid;
-        grid-template-columns: 1fr 1fr; /* 2 kolonner */
+        grid-template-columns: repeat(3, 1fr); /* 3 kolonner på desktop */
         gap: 20px;
-        max-width: 900px;
+        max-width: 1100px;
     }
     .day-card img { max-height: 200px; }
 }
