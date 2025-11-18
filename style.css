@@ -32,7 +32,8 @@ body {
  margin: 0;
  background-color: var(--lightbrown);
  color: var(--ink);
- font-family: 'EB Garamond', serif;
+ /* Global font: brug Noto Serif som i designet */
+ font-family: 'Noto Serif', serif;
  line-height: 1.5;
  -webkit-font-smoothing: antialiased;
  -moz-osx-font-smoothing: grayscale;
@@ -84,20 +85,28 @@ body {
   color: inherit;        /* arver farven fra .site-name */
   text-decoration: none; /* fjerner understregning */
 }
-
-
-
-/
-
 /*Styling af footer*/
 .site-footer {
-  background: #628974; /*Baggrundsfarve*/
-  color: #623d33; /*Tekstfarve*/
-  text-align: left;
-  padding-left: 2rem;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  padding-right: 1rem;
+    background: #628974; /*Baggrundsfarve*/
+    color: #623d33; /*Tekstfarve*/
+    text-align: left;
+    padding: 1.25rem; /* kortet padding på mobil først */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Footer: desktop layout (række) */
+@media (min-width: 769px) {
+    .site-footer {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1.5rem 2.5rem;
+    }
+    .site-footer .some-links {
+        order: 2;
+    }
 }
 
 
@@ -336,4 +345,245 @@ form button {
 
 form button:hover {
  background-color: #e2dac6;
+}
+
+/* ------------------------------------------------------------------
+     Modal / lightbox styling
+     - Vi skriver mobile-first CSS: først styles der passer til mobil
+         (enkelt, fuld bredde) og senere media queries for større skærme.
+     - Modal er skjult som standard (display:none) og vises ved at
+         sætte en klasse eller aria-hidden i JS. Her bruger vi id `media-modal`.
+------------------------------------------------------------------ */
+
+/* Grundlæggende skjul modal (ikke synlig) */
+#media-modal {
+    display: none; /* skjult som standard */
+    position: fixed;
+    inset: 0; /* top:0; right:0; bottom:0; left:0; */
+    z-index: 9999; /* over alt andet indhold */
+    align-items: center; /* centrerer modal-contents i flex */
+    justify-content: center;
+}
+
+/* Når modal skal vises, sætter JS display:flex */
+#media-modal[aria-hidden="false"] {
+    display: flex;
+}
+
+/* overlay: halvgennemsigtig baggrund så indhold bagved dæmpes */
+.modal-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+}
+
+.modal-content {
+    /* På mobil: fylder det meste af skærmen med en lille margin */
+    position: relative;
+    background: #fff;
+    border-radius: 8px;
+    width: calc(100% - 32px);
+    max-width: 720px; /* på store skærme begræns bredde */
+    max-height: calc(100vh - 48px);
+    overflow: auto;
+    box-shadow: 0 12px 24px rgba(0,0,0,0.25);
+    z-index: 2; /* over overlay */
+    padding: 12px;
+}
+
+.modal-close {
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.media-container iframe,
+.media-container img {
+    width: 100%;
+    height: auto; /* iframe får naturlig højde når vi sætter aspect-ratio i større skærm */
+    display: block;
+}
+
+/* Forbedret video-forslag: brug aspect-ratio på større skærme for pæn højde */
+@media (min-width: 769px) {
+    .media-container iframe {
+        aspect-ratio: 16 / 9; /* sikrer korrekt videoformat */
+        height: auto;
+    }
+    .modal-content {
+        padding: 20px;
+    }
+}
+
+/* Små tilpasninger for knapper vi tilføjede i HTML (mobil-first) */
+.open-video, .show-image {
+    display: inline-block;
+    margin: 10px 0;
+    padding: 10px 14px;
+    background: #6b3d32; /* brun nuance */
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 700;
+}
+.open-video:hover, .show-image:hover { opacity: 0.9; }
+
+/* Kommentar: Vi tilføjer kun små styles her for at bevare dit oprindelige design.
+     Modal-styling er adskilt så du let kan genbruge den på andre sider.
+*/
+
+/* ------------------------------------------------------------------
+     Dag-kort (Sæsonkalender) - mobile-first
+     - På mobil: en enkelt kolonne, store klikbare områder
+     - På desktop: skift til grid med 2 kolonner for bedre udnyttelse
+     - Danske kommentarer forklarer hvad hvert valg gør
+------------------------------------------------------------------ */
+
+.day-list {
+    display: flex;
+    flex-direction: column; /* mobil: stablet */
+    gap: 18px;
+    padding: 16px;
+    max-width: 420px;
+    margin: 0 auto 30px auto;
+}
+
+.day-card {
+    /* Fjern karton-lignende baggrund så layout ligner mockup (billeder står alene)
+       Vi lader kortene være simple containere med plads omkring billedet */
+    background: transparent;
+    border-radius: 0;
+    padding: 6px 0 12px 0;
+    box-shadow: none;
+    text-align: center;
+}
+
+.day-card h3 {
+    margin-bottom: 8px;
+    color: #6b3d32; /* brun farve der matcher temaet */
+}
+
+.day-card img {
+    border-radius: 8px;
+    max-height: 120px; /* mindre højde for at matche mockup proportioner */
+    object-fit: cover; /* sikrer billedet fylder boksen pænt */
+    display: block;
+    margin: 0 auto;
+    /* lys kant og skygge som i mockup */
+    border: 8px solid #F3EDE0; /* samme lys-beige som header */
+    box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+}
+
+.day-actions {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.day-actions .find-recipe {
+    display: inline-block;
+    background: #6b3d32;
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+/* styling så knappen ligner din mockup: small, rundet, med indre skygge */
+.day-actions .find-recipe,
+.day-actions .show-image {
+    background: #59362b; /* mørkere brun */
+    padding: 8px 16px;
+    border-radius: 12px;
+    box-shadow: inset 0 -3px 0 rgba(0,0,0,0.12);
+    color: #fff;
+    text-transform: none;
+    font-family: 'Noto Serif', serif;
+}
+
+.day-card h3{
+    font-family: 'Noto Serif', serif;
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+/* Thumbnail wrapper og overlay (tekst ovenpå billedet) */
+.thumbnail-wrapper{
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.thumbnail-overlay{
+    /* overlay knap/link der ligger ovenpå billedet */
+    position: absolute;
+    inset: 0; /* klikområde */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6b3d32; /* brun tekst som i temaet */
+    background: transparent; /* ingen hel-dækkende mørk baggrund */
+    border: none;
+    text-decoration: none;
+    font-family: 'Noto Serif', serif;
+    font-weight: 700;
+    opacity: 0; /* skjult som standard */
+    transition: opacity 220ms ease, transform 220ms ease;
+    z-index: 2; /* sørger for teksten ligger over pseudo-element */
+    padding: 0; /* selve teksten ligger ovenpå pseudo-elementet */
+    text-transform: none;
+    font-size: 14px;
+}
+.thumbnail-overlay:focus{ outline: none; }
+
+.thumbnail-overlay::before{
+    /* lille lys label placeret nederst på billedet (ikke fuld overlay)
+       Dette ligner dine mockups hvor teksten står i en lys boks midt/nederst */
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 12px;
+    width: 72%;
+    max-width: 240px;
+    height: 42px;
+    background: rgba(243,237,224,0.98); /* næsten hvid-beige */
+    border-radius: 10px;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+    z-index: 1; /* bag teksten */
+}
+
+.thumbnail-wrapper:hover .thumbnail-overlay,
+.thumbnail-wrapper:focus-within .thumbnail-overlay{
+    opacity: 1; /* vis overlay på hover eller fokus */
+    transform: translateY(-2px);
+}
+
+.thumbnail-overlay:focus{ outline: none; }
+
+/* sørg for at teksten står ovenpå pseudo-elementet */
+.thumbnail-overlay > *{ position: relative; z-index: 2; }
+
+.thumbnail-overlay { color: #7a4f43; }
+.thumbnail-overlay span{ padding: 6px 8px; }
+
+/* Desktop: to kolonner */
+@media (min-width: 769px) {
+    .day-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* 2 kolonner */
+        gap: 20px;
+        max-width: 900px;
+    }
+    .day-card img { max-height: 200px; }
 }

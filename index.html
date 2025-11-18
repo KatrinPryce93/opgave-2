@@ -4,33 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Forside</title>
-    <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700&family=Noto+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-    
-  <link rel="stylesheet" href="css/style.css">
+    <!-- Google Fonts: vi bruger Noto Serif som angivet i din designguide -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 
 </head>
 <body>
 
- <!--Header med menu og logo-->
-     <header class="site-header">
-        <div class="header-container">
-            <nav class="navbar">
-            <a href="index.html">Forside</a>
-            <a href="Sæsonkalender og opskrifter">Sæsonkalender og opskrifter</a>
-            <a href="Kontakt">Kontakt</a>
-          </nav>
-        <h1 class="site-name">
-  <a href="index.html">Fra Jord til Bord</a>
-</h1>
- <img src="#" alt="Virksomhedslogo" class="site-logo">
-  </div>
-</header>
+ <!--Header med logo og menu -->
+    <header class="site-header">
+      <div class="header-container">
+        <nav class="navbar">
+          <a href="index.html">Forside</a>
+          <a href="sæsonkalenderogopskrifter.html">Sæsonkalender og opskrifter</a>
+          <a href="kontakt.html">Kontakt</a>
+        </nav>
+        <!-- Vi indsætter logo-billedet i header i stedet for tekst -->
+        <a href="index.html" class="site-logo-link">
+          <img src="img/logo.png" alt="Virksomhedslogo" class="site-logo">
+        </a>
+      </div>
+    </header>
 <!--Herunder og ned til kommentaren med footer indsættes specifikt indhold på jeres side-->
 
 
 
    <main>
+     <!-- Body: 3 store billeder som fungerer som knapper (mobile-first) -->
+     <section class="hero-buttons">
+       <!-- Knap 1 -->
+       <a class="hero-btn" href="sæsonkalenderogopskrifter.html">
+         <img src="img/knap.1.jpg" alt="Sæsonkalender og opskrifter - knap 1">
+       </a>
+       <!-- Knap 2 -->
+       <a class="hero-btn" href="sæsonkalenderogopskrifter.html">
+         <img src="img/knap.2.png" alt="Ugens opskrifter - knap 2">
+       </a>
+       <!-- Knap 3 -->
+       <a class="hero-btn" href="kontakt.html">
+         <img src="img/farmers.photo.png" alt="Om os og kontakt - knap 3">
+       </a>
+     </section>
    </main>
 
 
